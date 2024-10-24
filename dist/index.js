@@ -29948,7 +29948,6 @@ async function getPRDetailsBetweenMerges() {
             base,
             head
         });
-        throw new Error(`Not implemented: ${commits}, ${owner}, ${repo}, ${base}, ${head}`);
         // デバッグ
         core.debug(`Commits between ${base} and ${head}: ${commits.commits.length}`);
         const prDetails = [];
@@ -29959,6 +29958,7 @@ async function getPRDetailsBetweenMerges() {
             if (commit.parents && commit.parents.length > 1) {
                 // コミットに関連するPRを取得
                 core.debug(`Fetching PRs associated with commit ${commit.sha}`);
+                throw new Error(`Not implemented: ${commit.sha}, ${commit.parents}`);
                 const { data: pullRequests } = await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
                     owner,
                     repo,
