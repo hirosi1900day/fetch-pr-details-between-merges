@@ -13,7 +13,7 @@ interface PRDetail {
  */
 async function getPRDetailsBetweenMerges(): Promise<void> {
   try {
-    throw new Error('Not implemented')
+    
     const token: string = core.getInput('github-token')
     const owner: string = core.getInput('repo-owner')
     const repo: string = core.getInput('repo-name')
@@ -21,7 +21,7 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     const head: string = core.getInput('to-sha')
 
     core.debug(`Fetching PR details between ${base} and ${head}`)
-
+    throw new Error('Not implemented')
     const octokit = github.getOctokit(token)
     // 2つのSHA間のコミットを比較して取得
     const { data: commits } = await octokit.rest.repos.compareCommits({

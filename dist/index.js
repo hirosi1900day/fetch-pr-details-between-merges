@@ -29934,13 +29934,13 @@ const core = __importStar(__nccwpck_require__(7484));
  */
 async function getPRDetailsBetweenMerges() {
     try {
-        throw new Error('Not implemented');
         const token = core.getInput('github-token');
         const owner = core.getInput('repo-owner');
         const repo = core.getInput('repo-name');
         const base = core.getInput('from-sha');
         const head = core.getInput('to-sha');
         core.debug(`Fetching PR details between ${base} and ${head}`);
+        throw new Error('Not implemented');
         const octokit = github.getOctokit(token);
         // 2つのSHA間のコミットを比較して取得
         const { data: commits } = await octokit.rest.repos.compareCommits({
