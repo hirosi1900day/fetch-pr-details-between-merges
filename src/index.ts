@@ -37,7 +37,7 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     const prDetails: PRDetail[] = []
 
     // 各コミットについて処理
-    throw new Error(`Not implemented3: ${commits.commits.length}, ${commits.commits[0].sha}`)
+    throw new Error(`Not implemented3: ${commits.commits.length}, ${commits.commits[0].parents}`)
     for (const commit of commits.commits) {
       // マージコミットかどうかを確認
       core.debug(`Checking commit ${commit.sha}`)
