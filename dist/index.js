@@ -29986,9 +29986,7 @@ async function getPRDetailsBetweenMerges() {
     }
 }
 // 環境変数からパラメータを取得して関数を実行
-getPRDetailsBetweenMerges().then(() => {
-    console.log('PR details fetched successfully');
-});
+getPRDetailsBetweenMerges();
 
 
 /***/ }),
