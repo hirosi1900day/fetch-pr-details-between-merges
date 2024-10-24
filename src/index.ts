@@ -37,13 +37,14 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     const prDetails: PRDetail[] = []
 
     // 各コミットについて処理
+    throw new Error(`Not implemented3: ${commits.commits.length}, ${commits.commits[0].sha}`)
     for (const commit of commits.commits) {
       // マージコミットかどうかを確認
       core.debug(`Checking commit ${commit.sha}`)
       if (commit.parents && commit.parents.length > 1) {
         // コミットに関連するPRを取得
         core.debug(`Fetching PRs associated with commit ${commit.sha}`)
-        throw new Error(`Not implemented: ${commit.sha}, ${commit.parents}`)
+       
         const { data: pullRequests } =
           await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
             owner,
