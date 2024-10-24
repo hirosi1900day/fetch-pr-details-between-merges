@@ -19,6 +19,8 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     const base: string = core.getInput('from-sha')
     const head: string = core.getInput('to-sha')
 
+    core.debug(`Fetching PR details between ${base} and ${head}`)
+
     const octokit = github.getOctokit(token)
     // 2つのSHA間のコミットを比較して取得
     const { data: commits } = await octokit.rest.repos.compareCommits({
@@ -27,21 +29,26 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
       base,
       head
     })
+    // デバッグ
+    core.debug(`Commits between ${base} and ${head}: ${commits.commits.length}`)
 
     const prDetails: PRDetail[] = []
 
     // 各コミットについて処理
     for (const commit of commits.commits) {
       // マージコミットかどうかを確認
+      core.debug(`Checking commit ${commit.sha}`)
       if (commit.parents && commit.parents.length > 1) {
         // コミットに関連するPRを取得
+        core.debug(`Fetching PRs associated with commit ${commit.sha}`)
         const { data: pullRequests } =
           await octokit.rest.repos.listPullRequestsAssociatedWithCommit({
             owner,
             repo,
             commit_sha: commit.sha
           })
-
+          
+          core.debug(`Found ${pullRequests.length} PRs associated with commit ${commit.sha}`)
         // 取得したPRの情報を抽出
         pullRequests.forEach(pr => {
           prDetails.push({
@@ -55,7 +62,7 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     }
 
     // 出力を設定
-    core.setOutput('pr_details', JSON.stringify(prDetails))
+    core.setOutput('pr-details', JSON.stringify(prDetails))
   } catch (error) {
     // エラーが発生した場合は失敗を報告
     if (error instanceof Error) {

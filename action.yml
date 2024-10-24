@@ -19,7 +19,7 @@ inputs:
     description: 'SHA of the second merge commit.'
     required: true
 outputs:
-  pr_details:
+  pr-details:
     description:
       'JSON formatted string containing details of all pull requests between the
       specified commits.'
