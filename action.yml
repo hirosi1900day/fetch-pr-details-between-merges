@@ -1,7 +1,7 @@
 name: 'Fetch PR Details Between Merges'
 description: 'Retrieve pull requests, their SHAs, and authors between two specified merge commits.'
 inputs:
-  github_token:
+  github-token:
     description: 'GitHub token used for authentication with the GitHub API.'
     required: true
   repo-owner:
