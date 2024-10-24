@@ -1,24 +1,24 @@
-name: 'The name of your action here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
-
-# Add your action's branding here. This will appear on the GitHub Marketplace.
-branding:
-  icon: 'heart'
-  color: 'red'
-
-# Define your inputs here.
+name: 'Fetch PR Details Between Merges'
+description: 'Retrieve pull requests, their SHAs, and authors between two specified merge commits.'
 inputs:
-  milliseconds:
-    description: 'Your input description here'
+  github_token:
+    description: 'GitHub token used for authentication with the GitHub API.'
     required: true
-    default: '1000'
-
-# Define your outputs here.
+  repo-owner:
+    description: 'Owner of the repository (user or organization).'
+    required: true
+  repo-name:
+    description: 'Repository name where the action will run.'
+    required: true
+  from-sha:
+    description: 'SHA of the first merge commit.'
+    required: true
+  to-sha:
+    description: 'SHA of the second merge commit.'
+    required: true
 outputs:
-  time:
-    description: 'Your output description here'
-
+  pr_details:
+    description: 'JSON formatted string containing details of all pull requests between the specified commits.'
 runs:
-  using: node20
-  main: dist/index.js
+  using: 'node20'
+  main: 'dist/index.js'
