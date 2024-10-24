@@ -1,5 +1,7 @@
 name: 'Fetch PR Details Between Merges'
-description: 'Retrieve pull requests, their SHAs, and authors between two specified merge commits.'
+description:
+  'Retrieve pull requests, their SHAs, and authors between two specified merge
+  commits.'
 inputs:
   github-token:
     description: 'GitHub token used for authentication with the GitHub API.'
@@ -18,7 +20,9 @@ inputs:
     required: true
 outputs:
   pr_details:
-    description: 'JSON formatted string containing details of all pull requests between the specified commits.'
+    description:
+      'JSON formatted string containing details of all pull requests between the
+      specified commits.'
 runs:
   using: 'node20'
   main: 'dist/index.js'
