@@ -29934,6 +29934,7 @@ const core = __importStar(__nccwpck_require__(7484));
  */
 async function getPRDetailsBetweenMerges() {
     try {
+        throw new Error('Not implemented');
         const token = core.getInput('github-token');
         const owner = core.getInput('repo-owner');
         const repo = core.getInput('repo-name');
@@ -29975,8 +29976,6 @@ async function getPRDetailsBetweenMerges() {
                 });
             }
         }
-        // 出力を設定
-        core.setOutput('pr-details', JSON.stringify(prDetails));
     }
     catch (error) {
         // エラーが発生した場合は失敗を報告

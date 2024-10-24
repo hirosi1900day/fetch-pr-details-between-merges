@@ -13,6 +13,7 @@ interface PRDetail {
  */
 async function getPRDetailsBetweenMerges(): Promise<void> {
   try {
+    throw new Error('Not implemented')
     const token: string = core.getInput('github-token')
     const owner: string = core.getInput('repo-owner')
     const repo: string = core.getInput('repo-name')
@@ -60,15 +61,12 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
         })
       }
     }
-
-    // 出力を設定
-    core.setOutput('pr-details', JSON.stringify(prDetails))
   } catch (error) {
     // エラーが発生した場合は失敗を報告
     if (error instanceof Error) {
       core.setFailed(`Error fetching PR details: ${error.message}`)
     }
-     core.setFailed(`Error fetching PR details:`)
+    core.setFailed(`Error fetching PR details:`)
   }
 }
 // 環境変数からパラメータを取得して関数を実行
