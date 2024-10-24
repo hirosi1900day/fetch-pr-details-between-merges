@@ -29940,7 +29940,6 @@ async function getPRDetailsBetweenMerges() {
         const base = core.getInput('from-sha');
         const head = core.getInput('to-sha');
         core.debug(`Fetching PR details between ${base} and ${head}`);
-        throw new Error('Not implemented');
         const octokit = github.getOctokit(token);
         // 2つのSHA間のコミットを比較して取得
         const { data: commits } = await octokit.rest.repos.compareCommits({
@@ -29949,6 +29948,7 @@ async function getPRDetailsBetweenMerges() {
             base,
             head
         });
+        throw new Error(`Not implemented: ${commits}, ${owner}, ${repo}, ${base}, ${head}`);
         // デバッグ
         core.debug(`Commits between ${base} and ${head}: ${commits.commits.length}`);
         const prDetails = [];
