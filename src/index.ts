@@ -68,6 +68,7 @@ async function getPRDetailsBetweenMerges(): Promise<void> {
     if (error instanceof Error) {
       core.setFailed(`Error fetching PR details: ${error.message}`)
     }
+     core.setFailed(`Error fetching PR details:`)
   }
 }
 // 環境変数からパラメータを取得して関数を実行
