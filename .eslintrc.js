@@ -1,52 +1,49 @@
-env:
-  node: true
-  es6: true
-  jest: true
-
-globals:
-  Atomics: readonly
-  SharedArrayBuffer: readonly
-
-ignorePatterns:
-  - '!.*'
-  - '**/node_modules/.*'
-  - '**/dist/.*'
-  - '**/coverage/.*'
-  - '*.json'
-  # テストファイルは除外
-  - '**/*.test.ts'
-
-parser: '@typescript-eslint/parser'
-
-parserOptions:
-  ecmaVersion: 2023
-  sourceType: module
-  project:
-    - './.github/linters/tsconfig.json'
-    - './tsconfig.json'
-
-plugins:
-  - jest
-  - '@typescript-eslint'
-
-extends:
-  - eslint:recommended
-  - plugin:@typescript-eslint/recommended-type-checked
-  - plugin:jest/recommended
-
-rules:
-  {
-    'camelcase': 'off',
+module.exports = {
+  env: {
+    node: true,
+    es6: true,
+    jest: true
+  },
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly'
+  },
+  ignorePatterns: [
+    '!.*',
+    '**/node_modules/.*',
+    '**/dist/.*',
+    '**/coverage/.*',
+    '*.json',
+    // テストファイルは除外
+    '**/*.test.ts',
+    '.eslintrc.*'
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2023,
+    sourceType: 'module',
+    project: ['./.github/linters/tsconfig.json', './tsconfig.json']
+  },
+  plugins: ['jest', '@typescript-eslint'],
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:jest/recommended'
+  ],
+  rules: {
+    camelcase: 'off',
     'eslint-comments/no-use': 'off',
     'eslint-comments/no-unused-disable': 'off',
     'i18n-text/no-en': 'off',
     'import/no-namespace': 'off',
     'no-console': 'off',
-    'semi': 'off',
+    semi: 'off',
     '@typescript-eslint/array-type': 'error',
     '@typescript-eslint/consistent-type-assertions': 'error',
-    '@typescript-eslint/explicit-member-accessibility':
-      ['error', { 'accessibility': 'no-public' }],
+    '@typescript-eslint/explicit-member-accessibility': [
+      'error',
+      { accessibility: 'no-public' }
+    ],
     '@typescript-eslint/no-empty-interface': 'error',
     '@typescript-eslint/no-extraneous-class': 'error',
     '@typescript-eslint/no-inferrable-types': 'error',
@@ -62,3 +59,4 @@ rules:
     '@typescript-eslint/require-array-sort-compare': 'error',
     '@typescript-eslint/space-before-function-paren': 'off'
   }
+}
