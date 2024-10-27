@@ -57,9 +57,6 @@ jobs:
         id: test-action
         uses: ./
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          repo-owner: ${{ github.repository_owner }}
-          repo-name: ${{ github.event.repository.name }}
           from-sha: '89fa52d'
           to-sha: ${{ github.sha }}
 

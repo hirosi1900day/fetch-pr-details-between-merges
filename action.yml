@@ -5,13 +5,16 @@ description:
 inputs:
   github-token:
     description: 'GitHub token used for authentication with the GitHub API.'
-    required: true
+    required: false
+    default: ${{ github.token }}
   repo-owner:
     description: 'Owner of the repository (user or organization).'
-    required: true
+    required: false
+    default: ${{ github.repository_owner }}
   repo-name:
     description: 'Repository name where the action will run.'
-    required: true
+    required: false
+    default: ${{ github.event.repository.name }}
   from-sha:
     description: 'SHA of the first merge commit.'
     required: true
