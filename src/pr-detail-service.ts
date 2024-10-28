@@ -11,7 +11,7 @@ export class PRDetailService {
   async getPRDetailsBetweenCommits(
     base: string,
     head: string
-  ): Promise<PRDetail[]> {
+  ): Promise<{ values: PRDetail[] }> {
     const commitsResponse = await this.gitHubClient.compareCommits(base, head)
     const commits = commitsResponse.data.commits
 
@@ -31,6 +31,6 @@ export class PRDetailService {
       }
     }
 
-    return prDetails
+    return { values: prDetails }
   }
 }

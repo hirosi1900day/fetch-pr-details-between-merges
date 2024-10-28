@@ -31,7 +31,7 @@ outputs:
       GitHub username of the author. - "mergedAt": The timestamp of when the
       pull request was merged.
 
-      Example output: [
+      Example output: values: [
         {
           "number": 123,
           "title": "Fix login issue",

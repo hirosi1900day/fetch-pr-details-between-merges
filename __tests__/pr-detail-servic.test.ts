@@ -54,31 +54,33 @@ describe('PRDetailService', () => {
       head
     )
 
-    expect(prDetails).toEqual([
-      {
-        pr_number: 1,
-        pr_title: 'PR Title 1',
-        pr_author: 'author1',
-        commit_sha: 'commit-sha-1'
-      },
-      {
-        pr_number: 2,
-        pr_title: 'PR Title 2',
-        pr_author: 'author2',
-        commit_sha: 'commit-sha-1'
-      },
-      {
-        pr_number: 1,
-        pr_title: 'PR Title 1',
-        pr_author: 'author1',
-        commit_sha: 'commit-sha-2'
-      },
-      {
-        pr_number: 2,
-        pr_title: 'PR Title 2',
-        pr_author: 'author2',
-        commit_sha: 'commit-sha-2'
-      }
-    ])
+    expect(prDetails).toEqual({
+      values: [
+        {
+          pr_number: 1,
+          pr_title: 'PR Title 1',
+          pr_author: 'author1',
+          commit_sha: 'commit-sha-1'
+        },
+        {
+          pr_number: 2,
+          pr_title: 'PR Title 2',
+          pr_author: 'author2',
+          commit_sha: 'commit-sha-1'
+        },
+        {
+          pr_number: 1,
+          pr_title: 'PR Title 1',
+          pr_author: 'author1',
+          commit_sha: 'commit-sha-2'
+        },
+        {
+          pr_number: 2,
+          pr_title: 'PR Title 2',
+          pr_author: 'author2',
+          commit_sha: 'commit-sha-2'
+        }
+      ]
+    })
   })
 })
