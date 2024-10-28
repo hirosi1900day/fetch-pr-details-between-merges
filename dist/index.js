@@ -30007,7 +30007,7 @@ async function getPRDetailsBetweenMerges() {
         core.debug(`Fetching PR details between ${base} and ${head}`);
         const prDetails = await prDetailService.getPRDetailsBetweenCommits(base, head);
         // Output the extracted PR details
-        core.setOutput('pr-details', prDetails);
+        core.setOutput('pr-details', JSON.stringify(prDetails, null, 2));
     }
     catch (error) {
         if (error instanceof Error) {
@@ -30046,7 +30046,7 @@ class PRDetailService {
                         pr_title: pr.title,
                         pr_author: pr.user?.login || '',
                         commit_sha: commit.sha,
-                        pr_md_links: `<${pr.html_url}|${pr.title}>`
+                        pr_md_link: `<${pr.html_url}|${pr.title}>`
                     });
                 });
             }

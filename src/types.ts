@@ -3,5 +3,5 @@ export interface PRDetail {
   pr_title: string // プルリクエストのタイトル
   pr_author: string // プルリクエストの作者
   commit_sha: string // 関連するコミットのSHA
-  pr_md_links: string // プルリクエストのリンク
+  pr_md_link: string // プルリクエストのリンク
 }

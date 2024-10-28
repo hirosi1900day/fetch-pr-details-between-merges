@@ -62,22 +62,29 @@ describe('index', () => {
             pr_title: 'PR Title 1',
             pr_author: 'author1',
             commit_sha: 'commit-sha-1',
-            pr_md_links: '<pr-url-1|PR Title 1>'
+            pr_md_link: '<pr-url-1|PR Title 1>'
           }
         ]
       })
     await getPRDetailsBetweenMerges()
 
-    expect(core.setOutput).toHaveBeenCalledWith('pr-details', {
-      values: [
+    expect(core.setOutput).toHaveBeenCalledWith(
+      'pr-details',
+      JSON.stringify(
         {
-          pr_number: 1,
-          pr_title: 'PR Title 1',
-          pr_author: 'author1',
-          commit_sha: 'commit-sha-1',
-          pr_md_links: '<pr-url-1|PR Title 1>'
-        }
-      ]
-    })
+          values: [
+            {
+              pr_number: 1,
+              pr_title: 'PR Title 1',
+              pr_author: 'author1',
+              commit_sha: 'commit-sha-1',
+              pr_md_link: '<pr-url-1|PR Title 1>'
+            }
+          ]
+        },
+        null,
+        2
+      )
+    )
   })
 })

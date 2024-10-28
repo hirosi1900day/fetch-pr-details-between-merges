@@ -37,7 +37,7 @@ outputs:
           "title": "Fix login issue",
           "sha": "abcd1234efgh5678ijkl9101mnopqrstuvwx",
           "author": "johndoe",
-          "pr_md_links":
+          "pr_md_link":
       "https://github.com/hirosi1900day/fetch-pr-details-between-merges/pull/7|Bump
       eslint from 9.13.0 to 9.14.0 "
         },
@@ -46,7 +46,7 @@ outputs:
           "title": "Add new feature for handling API requests",
           "sha": "wxyz5678abcd9101efgh2345ijklmnopqrst",
           "author": "janedoe",
-          "pr_md_links":
+          "pr_md_link":
       "https://github.com/hirosi1900day/fetch-pr-details-between-merges/pull/6|Bump
       eslint from 8.57.0 to 9.13.0 "
         }
