@@ -25,7 +25,8 @@ export class PRDetailService {
             pr_number: pr.number,
             pr_title: pr.title,
             pr_author: pr.user?.login || '',
-            commit_sha: commit.sha
+            commit_sha: commit.sha,
+            pr_md_links: `<${pr.html_url}|${pr.title}>`
           })
         })
       }

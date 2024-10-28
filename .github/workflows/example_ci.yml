@@ -32,3 +32,6 @@ jobs:
         run: |
           PR_TITLES=$(echo '${{ steps.test-action.outputs.pr-details }}' | jq -r '.values[] | .pr_title')
           echo "Extracted PR authors: $PR_TITLES"
+           
+          pr_md_linksS=$(echo '${{ steps.test-action.outputs.pr-details }}' | jq -r '.values[] | .pr_md_linkss')
+          echo "Extracted PR links: $pr_md_linksS"
