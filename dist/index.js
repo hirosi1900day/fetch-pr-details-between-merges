@@ -30050,7 +30050,7 @@ class PRDetailService {
                 });
             }
         }
-        return prDetails;
+        return { values: prDetails };
     }
 }
 exports.PRDetailService = PRDetailService;

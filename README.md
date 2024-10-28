@@ -36,7 +36,6 @@
 |                | - `"title"`: プルリクエストのタイトル。                                                                                                |
 |                | - `"sha"`: プルリクエストのコミットSHA。                                                                                               |
 |                | - `"author"`: プルリクエストの作成者のGitHubユーザー名。                                                                               |
-|                | - `"mergedAt"`: プルリクエストがマージされた日時。                                                                                     |
 
 ### アウトプットの例
 
@@ -46,15 +45,13 @@
     "number": 123,
     "title": "Fix login issue",
     "sha": "abcd1234efgh5678ijkl9101mnopqrstuvwx",
-    "author": "johndoe",
-    "mergedAt": "2023-10-01T12:34:56Z"
+    "author": "johndoe"
   },
   {
     "number": 124,
     "title": "Add new feature for handling API requests",
     "sha": "wxyz5678abcd9101efgh2345ijklmnopqrst",
-    "author": "janedoe",
-    "mergedAt": "2023-10-02T15:23:45Z"
+    "author": "janedoe"
   }
 ]
 ```

@@ -54,23 +54,27 @@ describe('index', () => {
     jest.spyOn(core, 'setOutput').mockImplementation(() => {})
     jest
       .spyOn(PRDetailService.prototype, 'getPRDetailsBetweenCommits')
-      .mockResolvedValue([
+      .mockResolvedValue({
+        values: [
+          {
+            pr_number: 1,
+            pr_title: 'PR Title 1',
+            pr_author: 'author1',
+            commit_sha: 'commit-sha-1'
+          }
+        ]
+      })
+    await getPRDetailsBetweenMerges()
+
+    expect(core.setOutput).toHaveBeenCalledWith('pr-details', {
+      values: [
         {
           pr_number: 1,
           pr_title: 'PR Title 1',
           pr_author: 'author1',
           commit_sha: 'commit-sha-1'
         }
-      ])
-    await getPRDetailsBetweenMerges()
-
-    expect(core.setOutput).toHaveBeenCalledWith('pr-details', [
-      {
-        pr_number: 1,
-        pr_title: 'PR Title 1',
-        pr_author: 'author1',
-        commit_sha: 'commit-sha-1'
-      }
-    ])
+      ]
+    })
   })
 })
