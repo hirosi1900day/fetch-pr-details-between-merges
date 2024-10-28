@@ -30007,7 +30007,7 @@ async function getPRDetailsBetweenMerges() {
         core.debug(`Fetching PR details between ${base} and ${head}`);
         const prDetails = await prDetailService.getPRDetailsBetweenCommits(base, head);
         // Output the extracted PR details
-        core.setOutput('pr-details', prDetails);
+        core.setOutput('pr-details', JSON.stringify(prDetails));
     }
     catch (error) {
         if (error instanceof Error) {
@@ -30041,11 +30041,13 @@ class PRDetailService {
             if (commit.parents && commit.parents.length > 1) {
                 const pullRequests = await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha);
                 pullRequests.data.forEach(pr => {
+                    const sanitizedTitle = pr.title.replace(/`/g, '\\`');
                     prDetails.push({
                         pr_number: pr.number,
                         pr_title: pr.title,
                         pr_author: pr.user?.login || '',
-                        commit_sha: commit.sha
+                        commit_sha: commit.sha,
+                        pr_md_link: `<${pr.html_url}|${sanitizedTitle}>`
                     });
                 });
             }

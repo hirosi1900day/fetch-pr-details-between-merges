@@ -23,7 +23,7 @@ export async function getPRDetailsBetweenMerges(): Promise<void> {
     )
 
     // Output the extracted PR details
-    core.setOutput('pr-details', prDetails)
+    core.setOutput('pr-details', JSON.stringify(prDetails))
   } catch (error) {
     if (error instanceof Error) {
       core.setFailed(`Error fetching PR details: ${error.message}`)
