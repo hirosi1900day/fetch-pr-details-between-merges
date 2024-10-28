@@ -70,21 +70,17 @@ describe('index', () => {
 
     expect(core.setOutput).toHaveBeenCalledWith(
       'pr-details',
-      JSON.stringify(
-        {
-          values: [
-            {
-              pr_number: 1,
-              pr_title: 'PR Title 1',
-              pr_author: 'author1',
-              commit_sha: 'commit-sha-1',
-              pr_md_link: '<pr-url-1|PR Title 1>'
-            }
-          ]
-        },
-        null,
-        2
-      )
+      JSON.stringify({
+        values: [
+          {
+            pr_number: 1,
+            pr_title: 'PR Title 1',
+            pr_author: 'author1',
+            commit_sha: 'commit-sha-1',
+            pr_md_link: '<pr-url-1|PR Title 1>'
+          }
+        ]
+      })
     )
   })
 })
