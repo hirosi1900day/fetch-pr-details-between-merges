@@ -30007,7 +30007,7 @@ async function getPRDetailsBetweenMerges() {
         core.debug(`Fetching PR details between ${base} and ${head}`);
         const prDetails = await prDetailService.getPRDetailsBetweenCommits(base, head);
         // Output the extracted PR details
-        core.setOutput('pr-details', JSON.stringify(prDetails, null, 2));
+        core.setOutput('pr-details', JSON.stringify(prDetails));
     }
     catch (error) {
         if (error instanceof Error) {
