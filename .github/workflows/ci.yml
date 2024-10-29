@@ -58,7 +58,7 @@ jobs:
         uses: ./
         with:
           from-sha: '89fa52d'
-          to-sha: '1af2c539a30e524340d33686d4aec17bd1cda21a'
+          to-sha: '5744610486ba366606045f290eb3816f46cd4737'
           
 
       - name: Print Output
