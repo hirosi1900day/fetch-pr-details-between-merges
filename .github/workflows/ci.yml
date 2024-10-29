@@ -58,7 +58,7 @@ jobs:
         uses: ./
         with:
           from-sha: '89fa52d'
-          to-sha: ${{ github.sha }}
+          to-sha: '1af2c539'
 
       - name: Print Output
         id: output
