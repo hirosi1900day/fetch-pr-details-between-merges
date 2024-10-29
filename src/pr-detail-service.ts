@@ -21,7 +21,8 @@ export class PRDetailService {
         const pullRequests =
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
         pullRequests.data.forEach(pr => {
-          const sanitizedTitle = pr.title.replace(/`/g, '\\`')
+          const sanitizedTitle = pr.title.replace(/["`]/g, '')
+
           prDetails.push({
             pr_number: pr.number,
             pr_title: pr.title,
