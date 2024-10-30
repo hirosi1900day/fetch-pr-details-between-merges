@@ -35,7 +35,8 @@
 |                | - `"number"`: プルリクエストの番号。                                                                                                   |
 |                | - `"title"`: プルリクエストのタイトル。                                                                                                |
 |                | - `"sha"`: プルリクエストのコミットSHA。                                                                                               |
-|                | - `"author"`: プルリクエストの作成者のGitHubユーザー名。                                                                               |
+|                | - `"author"`: プルリクエストの作成者のGitHubユーザー名。　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　   |
+|                | - `"merge_user"`: プルリクエストをマージしたユーザー名 　　　　　　　　　　　　　　                                                    |
 |                | - `"pr_md_url"`: PRのurlとPRのtitleのマークダウン                                                                                      |
 
 ### アウトプットの例
@@ -47,6 +48,7 @@
     "title": "Fix login issue",
     "sha": "abcd1234efgh5678ijkl9101mnopqrstuvwx",
     "author": "johndoe",
+    "merge_user": "johndoe",
     "pr_md_url": "<https://github.com/<organization>/<repository>/pull/123|Fix login issue>"
   },
   {
@@ -54,6 +56,7 @@
     "title": "Add new feature for handling API requests",
     "sha": "wxyz5678abcd9101efgh2345ijklmnopqrst",
     "author": "janedoe",
+    "merge_user": "johndoe",
     "pr_md_url": "<https://github.com/<organization>/<repository>/pull/124|Add new feature for handling API requests>"
   }
 ]

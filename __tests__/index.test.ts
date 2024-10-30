@@ -26,16 +26,6 @@ describe('index', () => {
   })
 
   it('should fetch and output PR details', async () => {
-    const mockPRDetails = [
-      {
-        pr_number: 1,
-        pr_title: 'PR Title 1',
-        pr_author: 'author1',
-        commit_sha: 'commit-sha-1',
-        html_url: 'pr-url-1'
-      }
-    ]
-
     jest.spyOn(core, 'getInput').mockImplementation(name => {
       switch (name) {
         case 'github-token':
@@ -61,6 +51,7 @@ describe('index', () => {
             pr_number: 1,
             pr_title: 'PR Title 1',
             pr_author: 'author1',
+            merge_user: 'merger_user1',
             commit_sha: 'commit-sha-1',
             pr_md_link: '<pr-url-1|PR Title 1>'
           }
@@ -76,6 +67,7 @@ describe('index', () => {
             pr_number: 1,
             pr_title: 'PR Title 1',
             pr_author: 'author1',
+            merge_user: 'merger_user1',
             commit_sha: 'commit-sha-1',
             pr_md_link: '<pr-url-1|PR Title 1>'
           }

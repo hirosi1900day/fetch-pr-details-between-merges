@@ -27,4 +27,12 @@ export class GitHubClient {
       commit_sha: commitSha
     })
   }
+
+  async getPRDetail(pull_number: number) {
+    return this.octokit.rest.pulls.get({
+      owner: this.owner,
+      repo: this.repo,
+      pull_number
+    })
+  }
 }

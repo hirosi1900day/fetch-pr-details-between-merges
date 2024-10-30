@@ -20,17 +20,21 @@ export class PRDetailService {
       if (commit.parents && commit.parents.length > 1) {
         const pullRequests =
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
-        pullRequests.data.forEach(pr => {
+        for (const pr of pullRequests.data) {
+          const prDetailsResponse = await this.gitHubClient.getPRDetail(
+            pr.number
+          )
           const sanitizedTitle = pr.title.replace(/["`]/g, '')
 
           prDetails.push({
             pr_number: pr.number,
-            pr_title: pr.title,
+            pr_title: sanitizedTitle, // ここで sanitizedTitle を使う
             pr_author: pr.user?.login || '',
+            merge_user: prDetailsResponse.data.merged_by?.login || '',
             commit_sha: commit.sha,
             pr_md_link: `<${pr.html_url}|${sanitizedTitle}>`
           })
-        })
+        }
       }
     }
 

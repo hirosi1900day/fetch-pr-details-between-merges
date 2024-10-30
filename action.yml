@@ -37,6 +37,7 @@ outputs:
           "title": "Fix login issue",
           "sha": "abcd1234efgh5678ijkl9101mnopqrstuvwx",
           "author": "johndoe",
+          "merge_user": "johndoe",
           "pr_md_link":
       "<https://github.com/<organization>/<repository>/pull/123|Fix login
       issue>"
@@ -46,6 +47,7 @@ outputs:
           "title": "Add new feature for handling API requests",
           "sha": "wxyz5678abcd9101efgh2345ijklmnopqrst",
           "author": "janedoe",
+          "merge_user": "janedoe",
           "pr_md_link":
       "<https://github.com/<organization>/<repository>/pull/124|Add new feature
       for handling API requests>"

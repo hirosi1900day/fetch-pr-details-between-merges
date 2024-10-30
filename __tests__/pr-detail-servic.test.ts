@@ -43,12 +43,18 @@ describe('PRDetailService', () => {
         html_url: 'pr-url-2'
       }
     ]
+    const mockPRDetailsResponse = {
+      merged_by: { login: 'merger' }
+    }
 
     gitHubClientMock.compareCommits.mockResolvedValue({
       data: { commits: mockCommits }
     } as any)
     gitHubClientMock.listPRsAssociatedWithCommit.mockResolvedValue({
       data: mockPullRequests
+    } as any)
+    gitHubClientMock.getPRDetail.mockResolvedValue({
+      data: mockPRDetailsResponse
     } as any)
 
     const prDetails = await prDetailService.getPRDetailsBetweenCommits(
@@ -62,6 +68,7 @@ describe('PRDetailService', () => {
           pr_number: 1,
           pr_title: 'PR Title 1',
           pr_author: 'author1',
+          merge_user: 'merger',
           commit_sha: 'commit-sha-1',
           pr_md_link: '<pr-url-1|PR Title 1>'
         },
@@ -69,6 +76,7 @@ describe('PRDetailService', () => {
           pr_number: 2,
           pr_title: 'PR Title 2',
           pr_author: 'author2',
+          merge_user: 'merger',
           commit_sha: 'commit-sha-1',
           pr_md_link: '<pr-url-2|PR Title 2>'
         },
@@ -76,6 +84,7 @@ describe('PRDetailService', () => {
           pr_number: 1,
           pr_title: 'PR Title 1',
           pr_author: 'author1',
+          merge_user: 'merger',
           commit_sha: 'commit-sha-2',
           pr_md_link: '<pr-url-1|PR Title 1>'
         },
@@ -83,6 +92,7 @@ describe('PRDetailService', () => {
           pr_number: 2,
           pr_title: 'PR Title 2',
           pr_author: 'author2',
+          merge_user: 'merger',
           commit_sha: 'commit-sha-2',
           pr_md_link: '<pr-url-2|PR Title 2>'
         }
