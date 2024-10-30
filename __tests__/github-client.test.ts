@@ -7,6 +7,9 @@ jest.mock('@actions/github', () => ({
       repos: {
         compareCommits: jest.fn(),
         listPullRequestsAssociatedWithCommit: jest.fn()
+      },
+      pulls: {
+        get: jest.fn()
       }
     }
   })
@@ -47,6 +50,17 @@ describe('GitHubClient', () => {
       owner,
       repo,
       commit_sha: commitSha
+    })
+  })
+
+  it('should retrieve pull request details for a given pull number', async () => {
+    const pullNumber = 123
+
+    await gitHubClient.getPRDetail(pullNumber)
+    expect(github.getOctokit(token).rest.pulls.get).toHaveBeenCalledWith({
+      owner,
+      repo,
+      pull_number: pullNumber
     })
   })
 })
