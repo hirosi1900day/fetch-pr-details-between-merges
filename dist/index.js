@@ -30058,7 +30058,9 @@ class PRDetailService {
         const commits = commitsResponse.data.commits;
         const prDetails = [];
         for (const commit of commits) {
-            if (commit.parents && commit.parents.length > 1) {
+            // スカッシュマージの場合、コミットメッセージにPR番号が含まれている
+            const prNumberMatch = commit.commit.message.match(/\s+\(#(\d+)\)$/);
+            if ((commit.parents && commit.parents.length > 1) || prNumberMatch) {
                 const pullRequests = await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha);
                 for (const pr of pullRequests.data) {
                     const prDetailsResponse = await this.gitHubClient.getPRDetail(pr.number);
