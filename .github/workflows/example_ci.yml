@@ -27,11 +27,14 @@ jobs:
         with:
           from-sha: '89fa52d'
           to-sha: ${{ github.sha }}
+          include-author: 'false'
+          include-title: 'false'
+          include-commit-sha: 'false'
 
       - name: Display extracted authors
         run: |
-          merge_users=$(echo '${{ steps.test-action.outputs.pr-details }}' | jq -r '.values[] | .merge_user')
-          echo "Extracted PR authors: $merge_users"
+          PR_TITLES=$(echo '${{ steps.test-action.outputs.pr-details }}' | jq -r '.values[] | .pr_title')
+          echo "Extracted PR authors: $PR_TITLES"
            
           pr_md_link=$(echo '${{ steps.test-action.outputs.pr-details }}' | jq -r '.values[] | .pr_md_link')
           echo "Extracted PR links: $pr_md_link"

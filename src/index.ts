@@ -12,6 +12,15 @@ export async function getPRDetailsBetweenMerges(): Promise<void> {
     const repo: string = core.getInput('repo-name')
     const base: string = core.getInput('from-sha')
     const head: string = core.getInput('to-sha')
+    const includePRNumber: boolean =
+      core.getInput('include-pr-number') === 'true'
+    const includeCommitSha: boolean =
+      core.getInput('include-commit-sha') === 'true'
+    const includeTitle: boolean = core.getInput('include-title') === 'true'
+    const includeAuthor: boolean = core.getInput('include-author') === 'true'
+    const includeMergeUser: boolean =
+      core.getInput('include-merge-user') === 'true'
+    const includeMdLink: boolean = core.getInput('include-md-link') === 'true'
 
     const gitHubClient = new GitHubClient(token, owner, repo)
     const prDetailService = new PRDetailService(gitHubClient)
@@ -19,7 +28,15 @@ export async function getPRDetailsBetweenMerges(): Promise<void> {
     core.debug(`Fetching PR details between ${base} and ${head}`)
     const prDetails = await prDetailService.getPRDetailsBetweenCommits(
       base,
-      head
+      head,
+      {
+        includePRNumber,
+        includeCommitSha,
+        includeTitle,
+        includeAuthor,
+        includeMergeUser,
+        includeMdLink
+      }
     )
 
     // Output the extracted PR details

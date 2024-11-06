@@ -21,23 +21,56 @@ inputs:
   to-sha:
     description: 'SHA of the second merge commit.'
     required: true
+  include-pr-number:
+    description: 'Include the pull request number in the output.'
+    required: false
+    default: 'true'
+  include-commit-sha:
+    description: 'Include the commit SHA in the output.'
+    required: false
+    default: 'true'
+  include-title:
+    description: 'Include the title of each pull request in the output.'
+    required: false
+    default: 'true'
+  include-author:
+    description: 'Include the author of each pull request in the output.'
+    required: false
+    default: 'true'
+  include-merge-user:
+    description: 'Include the user who merged each pull request in the output.'
+    required: false
+    default: 'true'
+  include-md-link:
+    description: 'Include a markdown link to each pull request in the output.'
+    required: false
+    default: 'true'
 outputs:
   pr-details:
     description: >
       JSON formatted string containing details of all pull requests between the
       specified commits. The format of each pull request object is as follows: -
-      "merge_user": The GitHub username of the user who merged the pull request.
-      - "pr_md_link": Markdown formatted link and title of the pull request,
-      pointing to GitHub.
+      "number": The pull request number. - "title": The title of the pull
+      request. - "sha": The commit SHA of the pull request. - "author": The
+      GitHub username of the author. - "mergedAt": The timestamp of when the
+      pull request was merged.
 
       Example output: values: [
         {
+          "number": 123,
+          "title": "Fix login issue",
+          "sha": "abcd1234efgh5678ijkl9101mnopqrstuvwx",
+          "author": "johndoe",
           "merge_user": "johndoe",
           "pr_md_link":
       "<https://github.com/<organization>/<repository>/pull/123|Fix login
       issue>"
         },
         {
+          "number": 124,
+          "title": "Add new feature for handling API requests",
+          "sha": "wxyz5678abcd9101efgh2345ijklmnopqrst",
+          "author": "janedoe",
           "merge_user": "janedoe",
           "pr_md_link":
       "<https://github.com/<organization>/<repository>/pull/124|Add new feature

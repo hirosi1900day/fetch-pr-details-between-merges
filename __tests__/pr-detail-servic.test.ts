@@ -59,25 +59,49 @@ describe('PRDetailService', () => {
 
     const prDetails = await prDetailService.getPRDetailsBetweenCommits(
       base,
-      head
+      head,
+      {
+        includePRNumber: true,
+        includeCommitSha: true,
+        includeTitle: true,
+        includeAuthor: true,
+        includeMergeUser: true,
+        includeMdLink: true
+      }
     )
 
     expect(prDetails).toEqual({
       values: [
         {
+          pr_number: 1,
+          pr_title: 'PR Title 1',
+          pr_author: 'author1',
           merge_user: 'merger',
+          commit_sha: 'commit-sha-1',
           pr_md_link: '<pr-url-1|PR Title 1>'
         },
         {
+          pr_number: 2,
+          pr_title: 'PR Title 2',
+          pr_author: 'author2',
           merge_user: 'merger',
+          commit_sha: 'commit-sha-1',
           pr_md_link: '<pr-url-2|PR Title 2>'
         },
         {
+          pr_number: 1,
+          pr_title: 'PR Title 1',
+          pr_author: 'author1',
           merge_user: 'merger',
+          commit_sha: 'commit-sha-2',
           pr_md_link: '<pr-url-1|PR Title 1>'
         },
         {
+          pr_number: 2,
+          pr_title: 'PR Title 2',
+          pr_author: 'author2',
           merge_user: 'merger',
+          commit_sha: 'commit-sha-2',
           pr_md_link: '<pr-url-2|PR Title 2>'
         }
       ]

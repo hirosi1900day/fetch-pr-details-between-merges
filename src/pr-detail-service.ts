@@ -10,7 +10,15 @@ export class PRDetailService {
 
   async getPRDetailsBetweenCommits(
     base: string,
-    head: string
+    head: string,
+    options: {
+      includePRNumber?: boolean
+      includeCommitSha?: boolean
+      includeTitle?: boolean
+      includeAuthor?: boolean
+      includeMergeUser?: boolean
+      includeMdLink?: boolean
+    } = {}
   ): Promise<{ values: PRDetail[] }> {
     const commitsResponse = await this.gitHubClient.compareCommits(base, head)
     const commits = commitsResponse.data.commits
@@ -26,10 +34,29 @@ export class PRDetailService {
           )
           const sanitizedTitle = pr.title.replace(/["`]/g, '')
 
-          prDetails.push({
-            merge_user: prDetailsResponse.data.merged_by?.login || '',
-            pr_md_link: `<${pr.html_url}|${sanitizedTitle}>`
-          })
+          // Conditionally build the PR detail object based on options
+          const prDetail: PRDetail = {}
+
+          if (options.includePRNumber) {
+            prDetail.pr_number = pr.number
+          }
+          if (options.includeCommitSha) {
+            prDetail.commit_sha = commit.sha
+          }
+          if (options.includeTitle) {
+            prDetail.pr_title = sanitizedTitle
+          }
+          if (options.includeAuthor) {
+            prDetail.pr_author = pr.user?.login || ''
+          }
+          if (options.includeMergeUser) {
+            prDetail.merge_user = prDetailsResponse.data.merged_by?.login || ''
+          }
+          if (options.includeMdLink) {
+            prDetail.pr_md_link = `<${pr.html_url}|${sanitizedTitle}>`
+          }
+
+          prDetails.push(prDetail)
         }
       }
     }

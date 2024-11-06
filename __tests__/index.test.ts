@@ -48,7 +48,11 @@ describe('index', () => {
       .mockResolvedValue({
         values: [
           {
+            pr_number: 1,
+            pr_title: 'PR Title 1',
+            pr_author: 'author1',
             merge_user: 'merger_user1',
+            commit_sha: 'commit-sha-1',
             pr_md_link: '<pr-url-1|PR Title 1>'
           }
         ]
@@ -60,7 +64,11 @@ describe('index', () => {
       JSON.stringify({
         values: [
           {
+            pr_number: 1,
+            pr_title: 'PR Title 1',
+            pr_author: 'author1',
             merge_user: 'merger_user1',
+            commit_sha: 'commit-sha-1',
             pr_md_link: '<pr-url-1|PR Title 1>'
           }
         ]
