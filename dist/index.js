@@ -30009,10 +30009,23 @@ async function getPRDetailsBetweenMerges() {
         const repo = core.getInput('repo-name');
         const base = core.getInput('from-sha');
         const head = core.getInput('to-sha');
+        const includePRNumber = core.getInput('include-pr-number') === 'true';
+        const includeCommitSha = core.getInput('include-commit-sha') === 'true';
+        const includeTitle = core.getInput('include-title') === 'true';
+        const includeAuthor = core.getInput('include-author') === 'true';
+        const includeMergeUser = core.getInput('include-merge-user') === 'true';
+        const includeMdLink = core.getInput('include-md-link') === 'true';
         const gitHubClient = new github_client_1.GitHubClient(token, owner, repo);
         const prDetailService = new pr_detail_service_1.PRDetailService(gitHubClient);
         core.debug(`Fetching PR details between ${base} and ${head}`);
-        const prDetails = await prDetailService.getPRDetailsBetweenCommits(base, head);
+        const prDetails = await prDetailService.getPRDetailsBetweenCommits(base, head, {
+            includePRNumber,
+            includeCommitSha,
+            includeTitle,
+            includeAuthor,
+            includeMergeUser,
+            includeMdLink
+        });
         // Output the extracted PR details
         core.setOutput('pr-details', JSON.stringify(prDetails));
     }
@@ -30040,7 +30053,7 @@ class PRDetailService {
     constructor(gitHubClient) {
         this.gitHubClient = gitHubClient;
     }
-    async getPRDetailsBetweenCommits(base, head) {
+    async getPRDetailsBetweenCommits(base, head, options = {}) {
         const commitsResponse = await this.gitHubClient.compareCommits(base, head);
         const commits = commitsResponse.data.commits;
         const prDetails = [];
@@ -30050,10 +30063,27 @@ class PRDetailService {
                 for (const pr of pullRequests.data) {
                     const prDetailsResponse = await this.gitHubClient.getPRDetail(pr.number);
                     const sanitizedTitle = pr.title.replace(/["`]/g, '');
-                    prDetails.push({
-                        merge_user: prDetailsResponse.data.merged_by?.login || '',
-                        pr_md_link: `<${pr.html_url}|${sanitizedTitle}>`
-                    });
+                    // Conditionally build the PR detail object based on options
+                    const prDetail = {};
+                    if (options.includePRNumber) {
+                        prDetail.pr_number = pr.number;
+                    }
+                    if (options.includeCommitSha) {
+                        prDetail.commit_sha = commit.sha;
+                    }
+                    if (options.includeTitle) {
+                        prDetail.pr_title = sanitizedTitle;
+                    }
+                    if (options.includeAuthor) {
+                        prDetail.pr_author = pr.user?.login || '';
+                    }
+                    if (options.includeMergeUser) {
+                        prDetail.merge_user = prDetailsResponse.data.merged_by?.login || '';
+                    }
+                    if (options.includeMdLink) {
+                        prDetail.pr_md_link = `<${pr.html_url}|${sanitizedTitle}>`;
+                    }
+                    prDetails.push(prDetail);
                 }
             }
         }
