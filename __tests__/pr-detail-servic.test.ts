@@ -22,11 +22,13 @@ describe('PRDetailService', () => {
     const mockCommits = [
       {
         sha: 'commit-sha-1',
-        parents: [{}, {}]
+        parents: [{}, {}],
+        commit: { message: 'commit message 1' }
       },
       {
         sha: 'commit-sha-2',
-        parents: [{}, {}]
+        parents: [{}, {}],
+        commit: { message: 'commit message 2' }
       }
     ]
     const mockPullRequests = [
