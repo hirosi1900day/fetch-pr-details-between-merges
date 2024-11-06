@@ -24,6 +24,7 @@ export class PRDetailService {
     const commits = commitsResponse.data.commits
 
     const prDetails: PRDetail[] = []
+    const seenPRNumbers = new Set<number>()
     for (const commit of commits) {
       // スカッシュマージの場合、コミットメッセージにPR番号が含まれている
       const prNumberMatch = commit.commit.message.match(/\s+\(#(\d+)\)$/)
@@ -32,34 +33,38 @@ export class PRDetailService {
         const pullRequests =
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
         for (const pr of pullRequests.data) {
-          const prDetailsResponse = await this.gitHubClient.getPRDetail(
-            pr.number
-          )
-          const sanitizedTitle = pr.title.replace(/["`]/g, '')
+          if (!seenPRNumbers.has(pr.number)) {
+            seenPRNumbers.add(pr.number)
+            const prDetailsResponse = await this.gitHubClient.getPRDetail(
+              pr.number
+            )
+            const sanitizedTitle = pr.title.replace(/["`]/g, '')
 
-          // Conditionally build the PR detail object based on options
-          const prDetail: PRDetail = {}
+            // Conditionally build the PR detail object based on options
+            const prDetail: PRDetail = {}
 
-          if (options.includePRNumber) {
-            prDetail.pr_number = pr.number
-          }
-          if (options.includeCommitSha) {
-            prDetail.commit_sha = commit.sha
-          }
-          if (options.includeTitle) {
-            prDetail.pr_title = sanitizedTitle
-          }
-          if (options.includeAuthor) {
-            prDetail.pr_author = pr.user?.login || ''
-          }
-          if (options.includeMergeUser) {
-            prDetail.merge_user = prDetailsResponse.data.merged_by?.login || ''
-          }
-          if (options.includeMdLink) {
-            prDetail.pr_md_link = `<${pr.html_url}|${sanitizedTitle}>`
-          }
+            if (options.includePRNumber) {
+              prDetail.pr_number = pr.number
+            }
+            if (options.includeCommitSha) {
+              prDetail.commit_sha = commit.sha
+            }
+            if (options.includeTitle) {
+              prDetail.pr_title = sanitizedTitle
+            }
+            if (options.includeAuthor) {
+              prDetail.pr_author = pr.user?.login || ''
+            }
+            if (options.includeMergeUser) {
+              prDetail.merge_user =
+                prDetailsResponse.data.merged_by?.login || ''
+            }
+            if (options.includeMdLink) {
+              prDetail.pr_md_link = `<${pr.html_url}|${sanitizedTitle}>`
+            }
 
-          prDetails.push(prDetail)
+            prDetails.push(prDetail)
+          }
         }
       }
     }
