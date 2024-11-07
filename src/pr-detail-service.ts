@@ -27,9 +27,9 @@ export class PRDetailService {
     const seenPRNumbers = new Set<number>()
     for (const commit of commits) {
       // スカッシュマージの場合、コミットメッセージにPR番号が含まれている
-      const prNumberMatch = commit.commit.message.match(/\s+\(#(\d+)\)$/)
-
-      if ((commit.parents && commit.parents.length > 1) || prNumberMatch) {
+      const prNumberMatch = commit.commit.message.match(/.+\s+\(#(\d+)\)/)
+      const isMergeCommit = commit.parents && commit.parents.length > 1
+      if (isMergeCommit || prNumberMatch) {
         const pullRequests =
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
         for (const pr of pullRequests.data) {
