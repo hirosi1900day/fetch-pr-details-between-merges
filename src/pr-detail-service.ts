@@ -33,23 +33,20 @@ export class PRDetailService {
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
         for (const pr of pullRequests.data) {
           if (!seenPRNumbers.has(pr.number)) {
-            const prDetailsResponse = await this.gitHubClient.getPRDetail(
-              pr.number
-            )
             if (prNumberMatch) {
-              const titleMatch = commit.commit.message.includes(pr.title);
+              const titleMatch = commit.commit.message.includes(pr.title)
               if (!titleMatch) {
                 continue
               }
             }
-            
+
             seenPRNumbers.add(pr.number)
 
-            const sanitizedTitle = pr.title.replace(/["`]/g, '')
-            
-            
+            const prDetailsResponse = await this.gitHubClient.getPRDetail(
+              pr.number
+            )
 
-            // Conditionally build the PR detail object based on options
+            const sanitizedTitle = pr.title.replace(/["`]/g, '')
             const prDetail: PRDetail = {}
 
             if (options.includePRNumber) {
