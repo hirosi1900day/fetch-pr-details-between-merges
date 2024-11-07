@@ -25,7 +25,7 @@ jobs:
         id: test-action
         uses: ./
         with:
-          from-sha: '89fa52d'
+          from-sha: '5ad0c09a4cd658562e69ec7f6c03c7752c5d8782'
           to-sha: "d1974a369798077c7fc7d7eec177314b79786442"
           include-author: 'false'
           include-title: 'false'
