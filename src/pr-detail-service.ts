@@ -27,20 +27,28 @@ export class PRDetailService {
     const seenPRNumbers = new Set<number>()
     for (const commit of commits) {
       // スカッシュマージの場合、コミットメッセージにPR番号が含まれている
-      const prNumberMatch = commit.commit.message.match(/\s+\(#(\d+)\)$/)
-
+      const prNumberMatch = commit.commit.message.match(/.+\s+\(#(\d+)\)/)
       if ((commit.parents && commit.parents.length > 1) || prNumberMatch) {
         const pullRequests =
           await this.gitHubClient.listPRsAssociatedWithCommit(commit.sha)
         for (const pr of pullRequests.data) {
           if (!seenPRNumbers.has(pr.number)) {
+            if (prNumberMatch) {
+              // PRのタイトルを特殊文字で分割して、各部分がcommit.commit.messageに含まれているかチェック
+              const titleParts = pr.title.split(/[\s"`']/) // スペース、バッククオート、シングルクオートで分割
+              const titleMatch = titleParts.every(part =>
+                commit.commit.message.includes(part)
+              )
+              if (!titleMatch) {
+                continue
+              }
+            }
+
             seenPRNumbers.add(pr.number)
             const prDetailsResponse = await this.gitHubClient.getPRDetail(
               pr.number
             )
             const sanitizedTitle = pr.title.replace(/["`]/g, '')
-
-            // Conditionally build the PR detail object based on options
             const prDetail: PRDetail = {}
 
             if (options.includePRNumber) {
