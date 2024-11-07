@@ -26,7 +26,7 @@ jobs:
         uses: ./
         with:
           from-sha: '89fa52d'
-          to-sha: ${{ github.sha }}
+          to-sha: "d1974a369798077c7fc7d7eec177314b79786442"
           include-author: 'false'
           include-title: 'false'
           include-commit-sha: 'false'
