@@ -75,10 +75,9 @@
     "pr_md_link": "<https://github.com/<organization>/<repository>/pull/124|Add new feature for handling API requests>"
   }
 ]
+```
 
 ## ワークフロー使用例
 
 以下の参考にしてください
 https://github.com/hirosi1900day/fetch-pr-details-between-merges/blob/main/.github/workflows/example_ci.yml
-
-```
