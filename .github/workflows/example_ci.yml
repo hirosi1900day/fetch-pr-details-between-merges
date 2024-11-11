@@ -23,7 +23,7 @@ jobs:
 
       - name: Test Local Action
         id: test-action
-        uses: ./
+        uses: hirosi1900day/fetch-pr-details-between-merges@v1.0.0
         with:
           from-sha: '89fa52d'
           to-sha: ${{ github.sha }}
